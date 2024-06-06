@@ -1,12 +1,29 @@
 # insta-food-lab
 
+Instagram for food lovers. (sounds cliché? I know)
+
 ## Stories
 
-- Sign-up should be completed in a few clicks (social login)
-- Profile with name, bio, contact
+- User can sign up or sign in with simple steps
+- User can update Profile with name, bio, contact
 - User can post food pictures (multiple) along with the name, description, price, geo-location (optional), and set rating out of 5
 - Users can like or dislike posts
 - Users can add or remove comments
-- User can follow other users
+- User can follow or unfollow other users
 - User Feed
-- Follow unfollow system
+
+More to come...
+
+## Technicality
+
+- Using react as frontend with tailwind css
+- Using laravel as the backend with Mongodb
+- OTP Login
+- RESTful API
+- Custom Auth
+- Use laravel advance features
+- Naming convention for react should be Camel Case (ex. firstName, lastName)
+- Naming convention for laravel should be Snake Case (ex. first_name, last_name) for more info (https://www.freecodecamp.org/news/programming-naming-conventions-explained)
+- UI should be simple and soft something like a baby of Instagram and Zomato
+
+More to come...
