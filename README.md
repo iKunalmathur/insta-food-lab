@@ -22,8 +22,7 @@ More to come...
 - RESTful API
 - Custom Auth
 - Use laravel advance features
-- Naming convention for react should be Camel Case (ex. firstName, lastName)
-- Naming convention for laravel should be Snake Case (ex. first_name, last_name) for more info (https://www.freecodecamp.org/news/programming-naming-conventions-explained)
+- The naming convention should be Camel Case (ex. firstName, lastName) for more info (https://www.freecodecamp.org/news/programming-naming-conventions-explained)
 - The UI should be simple and soft, like the lovechild of Instagram and Zomato.
 
 More to come...
