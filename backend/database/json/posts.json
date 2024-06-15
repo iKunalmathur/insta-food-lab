@@ -1,0 +1,72 @@
+[
+    {
+        "title": "Delicious Butter Chicken",
+        "description": "Creamy and rich butter chicken with a perfect blend of spices.",
+        "price_and_quantity": "500 INR - 1 kg",
+        "location": "Delhi, India",
+        "tags": "butter chicken, indian cuisine, spicy",
+        "rating": 4.8,
+        "no_of_likes": 120,
+        "no_of_comments": 45,
+        "is_archived": false,
+        "is_comment_disabled": false,
+        "created_at": "2024-06-14T12:34:56Z",
+        "updated_at": "2024-06-14T12:34:56Z"
+    },
+    {
+        "title": "Authentic Hyderabadi Biryani",
+        "description": "Experience the true flavors of Hyderabad with our special biryani.",
+        "price_and_quantity": "800 INR - 1.5 kg",
+        "location": "Hyderabad, India",
+        "tags": "biryani, hyderabad, indian food",
+        "rating": 4.9,
+        "no_of_likes": 200,
+        "no_of_comments": 75,
+        "is_archived": false,
+        "is_comment_disabled": false,
+        "created_at": "2024-06-15T08:00:00Z",
+        "updated_at": "2024-06-15T08:00:00Z"
+    },
+    {
+        "title": "Spicy Masala Dosa",
+        "description": "Crispy dosa filled with spicy potato masala, served with chutneys and sambar.",
+        "price_and_quantity": "100 INR - 2 pieces",
+        "location": "Bangalore, India",
+        "tags": "masala dosa, south indian, vegetarian",
+        "rating": 4.7,
+        "no_of_likes": 150,
+        "no_of_comments": 60,
+        "is_archived": false,
+        "is_comment_disabled": false,
+        "created_at": "2024-06-10T10:20:30Z",
+        "updated_at": "2024-06-10T10:20:30Z"
+    },
+    {
+        "title": "Tandoori Paneer Tikka",
+        "description": "Grilled paneer marinated in spices, perfect for a delicious snack.",
+        "price_and_quantity": "250 INR - 500 grams",
+        "location": "Mumbai, India",
+        "tags": "paneer tikka, tandoori, vegetarian",
+        "rating": 4.6,
+        "no_of_likes": 180,
+        "no_of_comments": 40,
+        "is_archived": false,
+        "is_comment_disabled": false,
+        "created_at": "2024-06-12T15:45:00Z",
+        "updated_at": "2024-06-12T15:45:00Z"
+    },
+    {
+        "title": "Gulab Jamun",
+        "description": "Soft and juicy gulab jamun soaked in sugar syrup, a classic Indian dessert.",
+        "price_and_quantity": "300 INR - 1 dozen",
+        "location": "Kolkata, India",
+        "tags": "gulab jamun, dessert, sweets",
+        "rating": 4.9,
+        "no_of_likes": 220,
+        "no_of_comments": 85,
+        "is_archived": false,
+        "is_comment_disabled": false,
+        "created_at": "2024-06-13T18:00:00Z",
+        "updated_at": "2024-06-13T18:00:00Z"
+    }
+]

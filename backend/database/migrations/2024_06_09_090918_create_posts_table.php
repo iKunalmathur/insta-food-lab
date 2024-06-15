@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('tags')->nullable();
             $table->decimal('rating', 2, 1)->nullable()->comment('from 0.0 to 5.0');
-            $table->integer('likes')->default(0)->comment();
-            $table->integer('comments')->default(0);
+            $table->integer('no_of_likes')->default(0);
+            $table->integer('no_of_comments')->default(0);
             $table->boolean('is_archived')->default(false);
             $table->boolean('is_comment_disabled')->default(false);
             $table->timestamps();
