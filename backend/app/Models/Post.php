@@ -26,4 +26,13 @@ class Post extends Model implements HasMedia
         'is_comment_disabled',
         'user_id',
     ];
+
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'model', 'model_type', 'model_id');
+    }
 }

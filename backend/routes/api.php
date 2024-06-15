@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\{
+    CommentController,
     PostController,
     UserController
 };
@@ -27,4 +28,15 @@ Route::prefix('/posts')
         Route::get('/{post}/show', [PostController::class, 'show'])->name('show');
         Route::patch('/{post}/update', [PostController::class, 'update'])->name('update');
         Route::delete('/{post}/delete', [PostController::class, 'delete'])->name('delete');
+    });
+
+// comments
+Route::prefix('/comments')
+    ->name('comments.')
+    ->group(function () {
+        Route::get('/{post}', [CommentController::class, 'index'])->name('index');
+        Route::post('/{post}', [CommentController::class, 'store'])->name('store');
+        Route::get('/{comment}/show', [CommentController::class, 'show'])->name('show');
+        Route::patch('/{comment}/update', [CommentController::class, 'update'])->name('update');
+        Route::delete('/{comment}/delete', [CommentController::class, 'delete'])->name('delete');
     });

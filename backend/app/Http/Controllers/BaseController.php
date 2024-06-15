@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
@@ -22,20 +27,28 @@ class BaseController extends Controller
     }
 
     protected function baseIndex(
-        EloquentBuilder|QueryBuilder $query,
+        Model|HasMany|HasOne|MorphMany|EloquentBuilder|QueryBuilder|EloquentCollection|Collection $query,
         string $resourceClass,
         bool $shouldPaginate,
         bool $latest = true
     ): AnonymousResourceCollection {
 
-        if ($latest) {
-            $query = $query->latest();
-        }
-
-        if ($shouldPaginate) {
-            $result = $query->paginate();
+        if ($query instanceof EloquentCollection || $query instanceof Collection) {
+            if ($latest) {
+                $result = $query->sortByDesc('created_at');
+            } else {
+                $result = $query;
+            }
         } else {
-            $result = $query->get();
+            if ($latest) {
+                $query = $query->latest();
+            }
+
+            if ($shouldPaginate) {
+                $result = $query->paginate();
+            } else {
+                $result = $query->get();
+            }
         }
 
         return $resourceClass::collection($result);
@@ -43,7 +56,7 @@ class BaseController extends Controller
 
     protected function baseStore(
         FormRequest $request,
-        EloquentBuilder|QueryBuilder $model,
+        HasMany|MorphMany|EloquentBuilder|QueryBuilder $model,
         string $resourceClass,
         callable $callback = null
     ): JsonResource {
@@ -69,7 +82,7 @@ class BaseController extends Controller
         string $resourceClass,
         callable $callback = null
     ): JsonResource {
-        $model->update($request->all());
+        $model->update($request->validated());
 
         if ($callback) {
             $callback($model);
