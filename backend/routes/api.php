@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\{
     CommentController,
+    LikeController,
     PostController,
     UserController
 };
@@ -39,4 +40,13 @@ Route::prefix('/comments')
         Route::get('/{comment}/show', [CommentController::class, 'show'])->name('show');
         Route::patch('/{comment}/update', [CommentController::class, 'update'])->name('update');
         Route::delete('/{comment}/delete', [CommentController::class, 'delete'])->name('delete');
+    });
+
+// likes
+Route::prefix('/likes')
+    ->name('likes.')
+    ->group(function () {
+        Route::get('/{uuid}', [LikeController::class, 'index'])->name('index');
+        Route::post('/{uuid}', [LikeController::class, 'store'])->name('store');
+        Route::delete('/{like}/delete', [LikeController::class, 'delete'])->name('delete');
     });

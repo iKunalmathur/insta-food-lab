@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Like;
 use App\Trait\HasUser;
 use App\Trait\HasUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,5 +35,10 @@ class Post extends Model implements HasMedia
     public function comments()
     {
         return $this->morphMany(Comment::class, 'model', 'model_type', 'model_id');
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'model', 'model_type', 'model_id');
     }
 }

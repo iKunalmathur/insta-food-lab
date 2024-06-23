@@ -22,4 +22,9 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'model', 'model_type', 'model_id');
+    }
 }
