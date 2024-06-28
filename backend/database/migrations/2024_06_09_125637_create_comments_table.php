@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->text('text')->nullable();
             $table->morphs('model');
-            $table->text('text');
-            $table->timestamps();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
             $table->uuid()->nullable()->unique();
         });
     }

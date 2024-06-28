@@ -4,14 +4,14 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommentStoreRequest extends FormRequest
+class FollowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,8 +22,7 @@ class CommentStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'model' => ['required', 'string', 'in:App\Models\Post,App\Models\Comment'],
-            'text' => ['required', 'string', 'max:255'],
+            //
         ];
     }
 }

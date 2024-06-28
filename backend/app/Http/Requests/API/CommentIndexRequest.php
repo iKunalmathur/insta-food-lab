@@ -4,7 +4,7 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommentStoreRequest extends FormRequest
+class CommentIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,6 @@ class CommentStoreRequest extends FormRequest
     {
         return [
             'model' => ['required', 'string', 'in:App\Models\Post,App\Models\Comment'],
-            'text' => ['required', 'string', 'max:255'],
         ];
     }
 }

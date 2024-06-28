@@ -48,4 +48,34 @@ class User extends Authenticatable implements HasMedia
             'password' => 'hashed',
         ];
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
+    }
+
+    public function follow($userId)
+    {
+        return $this->following()->attach($userId);
+    }
+
+    public function unfollow($userId)
+    {
+        return $this->following()->detach($userId);
+    }
+
+    public function isFollowing($userId)
+    {
+        return $this->following()->where('followed_id', $userId)->exists();
+    }
+
+    public function isFollowedBy($userId)
+    {
+        return $this->followers()->where('follower_id', $userId)->exists();
+    }
 }

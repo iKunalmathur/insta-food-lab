@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\API\CommentDeleteRequest;
+use App\Http\Requests\API\CommentIndexRequest;
 use App\Http\Requests\API\CommentStoreRequest;
 use App\Http\Requests\API\CommentUpdateRequest;
 use App\Http\Resources\API\CommentResource;
@@ -16,38 +17,29 @@ class CommentController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index(Post $post)
+    public function index(CommentIndexRequest $request, $uuid)
     {
+        $model = $request->model::where('uuid', $uuid)
+            ->firstOrFail();
+
         return parent::baseIndex(
-            $post->comments(),
+            $model->comments(),
             CommentResource::class,
-            TRUE
+            FALSE
         );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CommentStoreRequest $request, Post $post)
+    public function store(CommentStoreRequest $request, $uuid)
     {
+        $model = $request->model::where('uuid', $uuid)
+            ->firstOrFail();
+
         return parent::baseStore(
             $request,
-            $post->comments(),
-            CommentResource::class
-        );
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
-    {
-        request()->merge([
-            'withModel' => true,
-        ]);
-
-        return parent::baseShow(
-            $comment,
+            $model->comments(),
             CommentResource::class
         );
     }
@@ -57,6 +49,7 @@ class CommentController extends BaseController
      */
     public function update(CommentUpdateRequest $request, Comment $comment)
     {
+
         return parent::baseUpdate(
             $request,
             $comment,
