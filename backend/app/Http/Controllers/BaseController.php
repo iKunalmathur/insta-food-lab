@@ -22,8 +22,8 @@ class BaseController extends Controller
 {
     function __construct()
     {
-        $randomUser = User::inRandomOrder()->first();
-        Auth::onceUsingId($randomUser->id);
+        // $randomUser = User::inRandomOrder()->first();
+        // Auth::onceUsingId($randomUser->id);
     }
 
     protected function baseIndex(
@@ -108,7 +108,7 @@ class BaseController extends Controller
         string $resourceClass,
         callable $callback = null
     ): JsonResponse {
-        $model = $model->create($request->validated());
+        $model = $model->create($request->all());
 
         if ($callback) {
             $callback($model);

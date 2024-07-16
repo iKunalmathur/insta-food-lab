@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('no_of_comments')->default(0);
             $table->boolean('is_archived')->default(false);
             $table->boolean('is_comment_disabled')->default(false);
-            $table->timestamps();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
             $table->uuid()->nullable()->unique();
         });
     }

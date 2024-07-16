@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models\API;
+namespace App\Models;
 
+use App\Trait\HasUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Follow extends Model
+class BaseModel extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUUID;
 }

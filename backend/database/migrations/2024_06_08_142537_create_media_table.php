@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
 
             $table->morphs('model');
-            $table->uuid()->nullable()->unique();
             $table->string('collection_name');
             $table->string('name');
             $table->string('file_name');
@@ -27,6 +26,7 @@ return new class extends Migration
             $table->unsignedInteger('order_column')->nullable()->index();
 
             $table->nullableTimestamps();
+            $table->uuid()->nullable()->unique();
         });
     }
 };

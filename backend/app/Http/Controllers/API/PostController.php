@@ -7,6 +7,7 @@ use App\Http\Requests\API\PostStoreRequest;
 use App\Http\Requests\API\PostUpdateRequest;
 use App\Http\Resources\API\PostResource;
 use App\Models\Post;
+use App\Models\User;
 
 class PostController extends BaseController
 {
@@ -27,6 +28,10 @@ class PostController extends BaseController
      */
     public function store(PostStoreRequest $request)
     {
+        $request->merge([
+            'user_id' => User::inRandomOrder()->first()->id
+        ]);
+
         return parent::baseStore(
             $request,
             Post::query(),

@@ -10,7 +10,9 @@ trait HasUser
     public static function bootHasUser()
     {
         static::creating(function ($model) {
-            $model->user_id = Auth::id();
+            if (empty($model->user_id)) {
+                $model->user_id = Auth::id();
+            }
         });
     }
 

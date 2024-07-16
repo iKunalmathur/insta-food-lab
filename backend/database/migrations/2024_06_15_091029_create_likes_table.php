@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->morphs('model');
             $table->text('is_liked')->default(0);
-            $table->timestamps();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
             $table->uuid()->nullable()->unique();
         });
     }

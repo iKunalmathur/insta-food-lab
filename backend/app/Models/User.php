@@ -2,18 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Trait\HasUUID;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia
+class User extends BaseModel implements HasMedia
 {
-    use HasFactory, Notifiable, InteractsWithMedia, HasUUID;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.

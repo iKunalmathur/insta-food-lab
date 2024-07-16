@@ -12,7 +12,6 @@ class UserController extends BaseController
 {
     public function index()
     {
-
         return parent::baseIndex(
             User::query(),
             UserResource::class,

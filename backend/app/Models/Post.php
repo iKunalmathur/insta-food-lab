@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model implements HasMedia
+class Post extends BaseModel implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, HasUUID, HasUser;
+    use InteractsWithMedia, HasUser;
 
     protected $fillable = [
         'title',
@@ -29,7 +29,7 @@ class Post extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'tags' => 'array',
+        'is_comment_disabled' => 'boolean',
     ];
 
     public function comments()

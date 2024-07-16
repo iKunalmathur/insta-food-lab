@@ -21,6 +21,10 @@ class PostStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge([
+            'is_comment_disabled' => $this->boolean('is_comment_disabled'),
+        ]);
+
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['sometimes', 'string'],

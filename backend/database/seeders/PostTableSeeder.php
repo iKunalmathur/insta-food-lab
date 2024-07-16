@@ -20,11 +20,8 @@ class PostTableSeeder extends Seeder
         $json = file_get_contents(database_path('json/posts.json'));
         $data = json_decode($json);
         foreach ($data as $value) {
-
-            $randomUser = User::inRandomOrder()->first();
-            Auth::onceUsingId($randomUser->id);
-
             Post::create([
+                'user_id' => User::inRandomOrder()->first()->id,
                 'title' => $value->title,
                 'description' => $value->description,
                 'price_and_quantity' => $value->price_and_quantity,
