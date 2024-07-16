@@ -4,9 +4,7 @@ namespace App\Models;
 
 use App\Models\Like;
 use App\Trait\HasUser;
-use App\Trait\HasUUID;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 

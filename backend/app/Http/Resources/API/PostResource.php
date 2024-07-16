@@ -28,7 +28,7 @@ class PostResource extends JsonResource
             'is_archived' => $this->is_archived,
             'is_comment_disabled' => $this->is_comment_disabled,
             'user' => UserResource::make($this->user),
-            'images' => $this->getMedia('post_images'),
+            'images' => MediaResource::collection($this->getMedia('post_images')),
         ];
     }
 }
