@@ -28,10 +28,6 @@ class PostController extends BaseController
      */
     public function store(PostStoreRequest $request)
     {
-        $request->merge([
-            'user_id' => User::inRandomOrder()->first()->id
-        ]);
-
         return parent::baseStore(
             $request,
             Post::query(),

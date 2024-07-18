@@ -22,8 +22,8 @@ class BaseController extends Controller
 {
     function __construct()
     {
-        // $randomUser = User::inRandomOrder()->first();
-        // Auth::onceUsingId($randomUser->id);
+        $randomUser = User::inRandomOrder()->first();
+        Auth::onceUsingId($randomUser->id);
     }
 
     protected function baseIndex(

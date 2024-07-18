@@ -5,7 +5,7 @@ namespace App\Models;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends BaseModel implements HasMedia
+class User extends BaseModelWithAuth implements HasMedia
 {
     use InteractsWithMedia;
 
