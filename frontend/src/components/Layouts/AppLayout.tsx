@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { FaBell, FaPlus, FaPlusCircle, FaUserCircle } from 'react-icons/fa';
+import { FaBell, FaPlus, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Dialog from '../Elements/Dialog';
-import { PostCreate } from '../PostCreate';
+import Dialog from '@/components/Elements/Dialog';
+import { PostCreate } from '@/components/PostCreate';
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <div className="mx-auto flex h-screen min-h-screen max-w-sm flex-col justify-between border bg-gray-100">
+    <div className="relative mx-auto flex h-screen min-h-screen max-w-sm flex-col justify-between border bg-gray-100">
       <header className="flex h-[6vh] items-center justify-between bg-zinc-950 p-4 text-white">
         <Link
           to="/"

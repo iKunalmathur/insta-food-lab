@@ -2,6 +2,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { T_Post } from '../types';
 import PostController from '../controllers/PostController';
 import formData from '../utils/formData';
+import { useAppDispatch } from '@/redux/hooks';
+import { addPost } from '@/redux/features/post/postSlice';
+import { debugLog } from '@/utils/debug';
 
 export const PostCreate = () => {
   const {
@@ -10,11 +13,15 @@ export const PostCreate = () => {
     formState: { errors },
   } = useForm<T_Post>();
 
+  const dispatch = useAppDispatch();
+
   const onSubmit: SubmitHandler<T_Post> = async data => {
-    const Post = new PostController();
     data = formData(data);
-    const res = await Post.createPost(data);
-    console.log({ res });
+    const res = await PostController.createPost(data);
+    if (res.status === 'success') {
+      debugLog('components/PostCreate.tsx', res.data);
+      dispatch(addPost(res.data));
+    }
   };
 
   return (
@@ -50,7 +57,9 @@ export const PostCreate = () => {
             id="description"
             {...register('description', { required: true })}
           />
-          {errors.description && <span className="text-sm text-red-500">This field is required</span>}
+          {errors.description && (
+            <span className="text-sm text-red-500">This field is required</span>
+          )}
         </div>
         <div className="flex flex-col space-y-2">
           <label htmlFor="price_and_quantity">Price and Quantity</label>
@@ -59,7 +68,9 @@ export const PostCreate = () => {
             id="price_and_quantity"
             {...register('price_and_quantity', { required: true })}
           />
-          {errors.price_and_quantity && <span className="text-sm text-red-500">This field is required</span>}
+          {errors.price_and_quantity && (
+            <span className="text-sm text-red-500">This field is required</span>
+          )}
         </div>
         <div className="flex flex-col space-y-2">
           <label htmlFor="location">Location</label>
