@@ -16,7 +16,7 @@ class PostResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->toDateTimeString(),
             'title' => $this->title,
             'description' => $this->description,
             'price_and_quantity' => $this->price_and_quantity,

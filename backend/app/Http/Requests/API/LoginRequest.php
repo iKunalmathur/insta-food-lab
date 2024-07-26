@@ -4,14 +4,14 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LikeStoreRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return FALSE;
     }
 
     /**
@@ -21,11 +21,9 @@ class LikeStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->mergeIfMissing(config('settings.models.like.default', []));
-
         return [
-            'model' => ['required', 'string', 'in:App\Models\Post,App\Models\Comment'],
-            'is_liked' => ['required', 'boolean', 'min:0', 'max:1'],
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
         ];
     }
 }

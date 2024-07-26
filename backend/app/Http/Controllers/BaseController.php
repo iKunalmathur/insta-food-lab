@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
 {
-    function __construct()
-    {
-        $randomUser = User::inRandomOrder()->first();
-        Auth::onceUsingId($randomUser->id);
-    }
+    // function __construct()
+    // {
+    //     $randomUser = User::inRandomOrder()->first();
+    //     Auth::onceUsingId($randomUser->id);
+    // }
 
     protected function baseIndex(
         Model|HasMany|HasOne|MorphMany|EloquentBuilder|QueryBuilder|EloquentCollection|Collection $query,
@@ -105,13 +105,17 @@ class BaseController extends Controller
     protected function baseStore(
         FormRequest $request,
         HasMany|MorphMany|EloquentBuilder|QueryBuilder $model,
-        string $resourceClass,
+        string $resourceClass = null,
         callable $callback = null
-    ): JsonResponse {
+    ): JsonResponse|Model {
         $model = $model->create($request->all());
 
         if ($callback) {
             $callback($model);
+        }
+
+        if ($resourceClass == null) {
+            return $model;
         }
 
         return response()->json(

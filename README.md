@@ -78,6 +78,11 @@ Develop and launch a Minimum Viable Product (MVP) of a social media platform ded
 
 - Implement user authentication and authorization.
 - Develop APIs for content sharing, social interactions, and recipes.
+  - Post
+  - Recipe (later)
+  - Comment
+  - Like
+  - Follow
 
 ### 4.3 Front-End Development
 

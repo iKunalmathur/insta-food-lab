@@ -32,4 +32,9 @@ class Comment extends Model
     {
         return $this->morphMany(Like::class, 'model', 'model_type', 'model_id');
     }
+
+    public function isAlreadyLiked($user_id)
+    {
+        return $this->likes()->where('user_id', $user_id)->exists();
+    }
 }

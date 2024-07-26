@@ -17,4 +17,8 @@ class Like extends Model
         'model_type',
         'is_liked'
     ];
+
+    protected $casts = [
+        'is_liked' => 'boolean',
+    ];
 }

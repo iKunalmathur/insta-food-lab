@@ -14,6 +14,17 @@ class LikeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $response = [
+            'uuid' => $this->uuid,
+            'is_liked' => $this->is_liked,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'user' => UserResource::make($this->user),
+        ];
+
+        if ($request['withModel'] === true) {
+            $response['model'] = $this->model;
+        }
+
+        return $response;
     }
 }

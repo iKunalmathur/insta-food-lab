@@ -8,9 +8,11 @@ use App\Http\Requests\API\LikeStoreRequest;
 use App\Http\Resources\API\LikeResource;
 use App\Models\Like;
 use App\Models\Post;
+use App\Trait\TRequestResponse;
 
 class LikeController extends BaseController
 {
+    use TRequestResponse;
     /**
      * Display a listing of the resource.
      */
@@ -34,6 +36,13 @@ class LikeController extends BaseController
         $model = $request->model::where('uuid', $uuid)
             ->firstOrFail();
 
+        if ($model->isAlreadyLiked(auth()->user()->id)) {
+            return $this->sendError(
+                'You already liked this ' . str_replace('App\Models\\', '', $model->getMorphClass()),
+                401
+            );
+        }
+
         return parent::baseStore(
             $request,
             $model->likes(),
@@ -46,6 +55,10 @@ class LikeController extends BaseController
      */
     public function delete(Like $like)
     {
+        if (auth()->user()->id !== $like->user_id) {
+            return $this->sendError('You are not allowed to delete this like', 401);
+        }
+
         return parent::baseDelete($like);
     }
 }

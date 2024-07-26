@@ -5,11 +5,13 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\BaseController;
 use App\Http\Resources\API\FollowResource;
 use App\Models\User;
+use App\Trait\TRequestResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class FollowController extends BaseController
 {
+    use TRequestResponse;
     /**
      * Display a listing of the resource.
      */
@@ -42,12 +44,12 @@ class FollowController extends BaseController
         $following = User::where('uuid', $uuid)->firstOrFail();
 
         if (auth()->user()->isFollowing($following->id) || auth()->user()->id === $following->id) {
-            return;
+            return $this->sendError('You are already following ' . $following->name, 401);
         }
 
         auth()->user()->follow($following);
 
-        return response()->json('', 201);
+        return $this->sendResponse('You followed ' . $following->name, 201);
     }
 
     /**

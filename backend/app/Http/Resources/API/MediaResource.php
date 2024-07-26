@@ -15,7 +15,7 @@ class MediaResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'custom_properties' => $this->custom_properties,
+            'uuid' => $this->uuid,
             'extension' => $this->extension,
             'file_name' => $this->file_name,
             'name' => $this->name,
@@ -23,7 +23,7 @@ class MediaResource extends JsonResource
             'original_url' => $this->original_url,
             'preview_url' => $this->preview_url,
             'size' => $this->size,
-            'uuid' => $this->uuid,
+            'custom_properties' => $this->custom_properties,
         ];
     }
 }

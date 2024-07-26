@@ -27,6 +27,7 @@ class Post extends BaseModel implements HasMedia
     ];
 
     protected $casts = [
+        'is_archived' => 'boolean',
         'is_comment_disabled' => 'boolean',
     ];
 
@@ -38,5 +39,10 @@ class Post extends BaseModel implements HasMedia
     public function likes()
     {
         return $this->morphMany(Like::class, 'model', 'model_type', 'model_id');
+    }
+
+    public function isAlreadyLiked($user_id)
+    {
+        return $this->likes()->where('user_id', $user_id)->exists();
     }
 }

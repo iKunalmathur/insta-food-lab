@@ -14,21 +14,17 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $response =  [
+            'uuid' => $this->uuid,
+            'text' => $this->text,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'user' => UserResource::make($this->user),
+        ];
+
         if ($request['withModel'] === true) {
-            return [
-                'uuid' => $this->uuid,
-                'text' => $this->text,
-                'created_at' => $this->created_at->toDateTimeString(),
-                'user' => UserResource::make($this->user),
-                'model' => $this->model,
-            ];
-        } else {
-            return [
-                'uuid' => $this->uuid,
-                'text' => $this->text,
-                'created_at' => $this->created_at->toDateTimeString(),
-                'user' => UserResource::make($this->user),
-            ];
+            $response['model'] = $this->model;
         }
+
+        return $response;
     }
 }
