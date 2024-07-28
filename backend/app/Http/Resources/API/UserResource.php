@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'email' => $this->email,
-            'avatar' => $this->getFirstMediaUrl('avatars'),
+            'avatar' => !empty($this->getFirstMediaUrl('avatars')) ? $this->getFirstMediaUrl('avatars')  : 'https://ui-avatars.com/api/?background=f66151&name=' . $this->name,
         ];
     }
 }

@@ -3,19 +3,15 @@ import { FaBell, FaPlus, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Dialog from '@/components/Elements/Dialog';
 import { PostCreate } from '@/components/PostCreate';
+import { Logo } from '../Logo';
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <div className="relative mx-auto flex h-screen min-h-screen max-w-sm flex-col justify-between border bg-gray-100">
+    <div className="relative mx-auto flex h-screen flex-col justify-between border bg-gray-100">
       <header className="flex h-[6vh] items-center justify-between bg-zinc-950 p-4 text-white">
-        <Link
-          to="/"
-          className="font-bold"
-        >
-          InstaFood Lab
-        </Link>
+        <Logo className="text-xl" />
         <nav>
           <ul className="flex gap-4">
             <li>
@@ -33,7 +29,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
       </header>
       <main className="h-[88vh] bg-zinc-900 p-1 text-white">{children}</main>
       <footer className="mt-auto h-[6vh] bg-zinc-950 p-4 text-white">
-        <Dialog
+        {/* <Dialog
           dialogOpen={dialogOpen}
           setDialogOpen={setDialogOpen}
         >
@@ -43,7 +39,7 @@ export const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <button onClick={() => setDialogOpen(true)}>
             <FaPlus size={32} />
           </button>
-        </div>
+        </div> */}
       </footer>
     </div>
   );

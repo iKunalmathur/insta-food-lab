@@ -28,4 +28,10 @@ export type T_User = {
   created_at: string;
 };
 
+export type T_LoginUser = {
+  name?: string;
+  email: string;
+  password: string;
+};
+
 export type T_REQ_METHOD = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';

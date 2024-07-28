@@ -20,9 +20,11 @@ const Home = () => {
   useEffect(() => {
     async function fetchPosts() {
       const res = await PostController.getPosts();
-      debugLog('components/Home.tsx', res.data);
-      dispatch(setPosts(res.data));
-      dispatch(setLoading(false));
+      debugLog('components/Home.tsx', res);
+      if (res.data?.length) {
+        dispatch(setPosts(res.data));
+        dispatch(setLoading(false));
+      }
     }
 
     fetchPosts();

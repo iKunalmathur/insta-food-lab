@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\API\RegisterRequest;
+use App\Http\Resources\API\UserResource;
 use App\Models\User;
 use App\Trait\TRequestResponse;
 
@@ -43,7 +44,7 @@ class AuthController extends BaseController
 
     public function me()
     {
-        return $this->sendResponse(auth()->user(), 'Successfully logged in');
+        return $this->sendResponse(UserResource::make(auth()->user()), 'Successfully logged in');
     }
 
     public function logout()

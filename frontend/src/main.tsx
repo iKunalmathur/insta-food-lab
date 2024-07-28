@@ -7,9 +7,11 @@ import { Provider as ReduxProvider } from 'react-redux';
 import store from '@/redux/store.ts';
 
 import App from '@/App.tsx';
-import Home from '@/components/Home.tsx';
 import { Notifications } from '@/components/Notifications.tsx';
-import { Profile } from '@/components/Profile.tsx';
+import { LoginPage } from './pages/LoginPage';
+import { RegPage } from './pages/RegPage';
+import { HomePage } from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,16 @@ const router = createBrowserRouter([
     errorElement: <div>Error</div>,
     children: [
       {
+        path: '/login',
+        element: <LoginPage />,
+      },
+      {
+        path: '/register',
+        element: <RegPage />,
+      },
+      {
         path: '/',
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: '/notifications',
@@ -27,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <Profile />,
+        element: <ProfilePage />,
       },
     ],
   },
