@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\API\CommentDeleteRequest;
 use App\Http\Requests\API\CommentIndexRequest;
 use App\Http\Requests\API\CommentStoreRequest;
 use App\Http\Requests\API\CommentUpdateRequest;
 use App\Http\Resources\API\CommentResource;
 use App\Models\Comment;
-use App\Models\Post;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CommentController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(CommentIndexRequest $request, $uuid)
+    public function index(CommentIndexRequest $request, $uuid):JsonResponse
     {
         $model = $request->model::where('uuid', $uuid)
             ->firstOrFail();
@@ -32,7 +30,7 @@ class CommentController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CommentStoreRequest $request, $uuid)
+    public function store(CommentStoreRequest $request, $uuid):JsonResponse
     {
         $model = $request->model::where('uuid', $uuid)
             ->firstOrFail();
@@ -47,7 +45,7 @@ class CommentController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(CommentUpdateRequest $request, Comment $comment)
+    public function update(CommentUpdateRequest $request, Comment $comment):JsonResponse
     {
 
         return parent::baseUpdate(
@@ -60,7 +58,7 @@ class CommentController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(Comment $comment)
+    public function delete(Comment $comment):JsonResponse
     {
         return parent::baseDelete($comment);
     }

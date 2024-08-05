@@ -7,14 +7,13 @@ use App\Http\Requests\API\RegisterRequest;
 use App\Http\Resources\API\UserResource;
 use App\Models\User;
 use App\Trait\TRequestResponse;
-
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends BaseController
 {
     use TRequestResponse;
 
-    public function login()
+    public function login(): JsonResponse
     {
         $credentials = request(['email', 'password']);
 
@@ -25,7 +24,7 @@ class AuthController extends BaseController
         return $this->respondWithToken($token);
     }
 
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): JsonResponse
     {
         $credentials = $request->validated();
 
@@ -42,18 +41,18 @@ class AuthController extends BaseController
         return $this->sendError('Registration failed', 401);
     }
 
-    public function me()
+    public function me(): JsonResponse
     {
         return $this->sendResponse(UserResource::make(auth()->user()), 'Successfully logged in');
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->logout(TRUE);
         return $this->sendResponse(null, 'Successfully logged out');
     }
 
-    public function refresh()
+    public function refresh(): JsonResponse
     {
         return $this->respondWithToken(auth()->refresh());
     }

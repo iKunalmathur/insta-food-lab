@@ -97,7 +97,8 @@ class BaseController extends Controller
         return response()->json(
             [
                 'status' => 'success',
-                'data' => $resourceClass::make($model)
+                'data' => $resourceClass::make($model),
+                'message' => 'Fetched successfully'
             ]
         );
     }
@@ -121,7 +122,8 @@ class BaseController extends Controller
         return response()->json(
             [
                 'status' => 'success',
-                'data' => $resourceClass::make($model)
+                'data' => $resourceClass::make($model),
+                'message' => 'Created successfully'
             ]
         );
     }
@@ -141,16 +143,22 @@ class BaseController extends Controller
         return response()->json(
             [
                 'status' => 'success',
-                'data' => $resourceClass::make($model)
+                'data' => $resourceClass::make($model),
+                'message' => 'Updated successfully'
             ]
         );
     }
 
     protected function baseDelete(
         Model $model
-    ): Response {
+    ): JsonResponse {
         $model->delete();
 
-        return response()->noContent();
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Deleted successfully'
+            ]
+        );
     }
 }

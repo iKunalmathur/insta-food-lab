@@ -21,6 +21,13 @@ class PostUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->mergeIfMissing(config('settings.models.post.default', []));
+
+        $this->merge([
+            'is_archived' => $this->boolean('is_archived'),
+            'is_comment_disabled' => $this->boolean('is_comment_disabled'),
+        ]);
+
         return [
             'title' => ['sometimes', 'string', 'max:255'],
             'description' => ['sometimes', 'string'],

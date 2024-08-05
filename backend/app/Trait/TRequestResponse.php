@@ -13,7 +13,7 @@ trait TRequestResponse
         ]);
     }
 
-    protected function sendResponse($data = null, $message, $status = 200)
+    protected function sendResponse($data = null, string $message, int $status = 200)
     {
         $response = [
             'status' => 'success',

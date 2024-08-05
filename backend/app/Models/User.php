@@ -43,6 +43,11 @@ class User extends BaseModelWithAuth implements HasMedia
         ];
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');

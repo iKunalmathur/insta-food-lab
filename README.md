@@ -82,7 +82,7 @@ Develop and launch a Minimum Viable Product (MVP) of a social media platform ded
   - Profile (pending)
   - Post
   - Recipe (later)
-  - Feed (pending)
+  - Feed
   - Comment
   - Like
   - Follow

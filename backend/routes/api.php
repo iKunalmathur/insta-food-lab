@@ -3,15 +3,15 @@
 use App\Http\Controllers\API\{
     AuthController,
     CommentController,
+    FeedController,
     FollowController,
     LikeController,
     PostController,
-    UserController
 };
 
 use Illuminate\Support\Facades\Route;
 
-// auth
+// Authentication routes
 Route::prefix('/auth')
     ->name('auth.')
     ->group(function () {
@@ -31,6 +31,7 @@ Route::prefix('/auth')
             });
     });
 
+// Auth protected routes
 Route::middleware('auth:api')
     ->group(
         function () {
@@ -49,6 +50,14 @@ Route::middleware('auth:api')
             //         Route::delete('/{user}/delete', [UserController::class, 'delete'])
             //             ->name('delete');
             //     });
+
+            // feed
+            Route::prefix('/feed')
+                ->name('feed.')
+                ->group(function () {
+                    Route::get('/', [FeedController::class, 'index'])
+                        ->name('index');
+                });
 
             // posts
             Route::prefix('/posts')

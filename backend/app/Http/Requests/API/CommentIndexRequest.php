@@ -4,6 +4,9 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $model
+ */
 class CommentIndexRequest extends FormRequest
 {
     /**

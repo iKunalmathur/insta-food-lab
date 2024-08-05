@@ -8,16 +8,21 @@ use App\Http\Requests\API\PostUpdateRequest;
 use App\Http\Resources\API\PostResource;
 use App\Models\Post;
 use App\Models\User;
+use App\Trait\TRequestResponse;
+use Illuminate\Http\JsonResponse;
 
 class PostController extends BaseController
 {
+    use TRequestResponse;
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():JsonResponse
     {
+        $posts = auth()->user()->posts();
+
         return parent::baseIndex(
-            Post::query(),
+            $posts,
             PostResource::class,
             TRUE,
         );
@@ -26,7 +31,7 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(PostStoreRequest $request)
+    public function store(PostStoreRequest $request):JsonResponse
     {
         return parent::baseStore(
             $request,
@@ -53,7 +58,7 @@ class PostController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post):JsonResponse
     {
         return parent::baseShow(
             $post,
@@ -64,20 +69,28 @@ class PostController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostUpdateRequest $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post):JsonResponse
     {
         return parent::baseUpdate(
             $request,
             $post,
-            PostResource::class
+            PostResource::class,
+            function (Post $post) use ($request) {
+            }
         );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(Post $post)
+    public function delete(Post $post):JsonResponse
     {
         parent::baseDelete($post);
+
+        return  $this->sendResponse(
+            NULL,
+            "Post deleted successfully",
+            '204'
+        );
     }
 }
