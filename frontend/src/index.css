@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-screen max-w-sm bg-gray-800;
+  @apply min-h-screen max-w-screen-md bg-gray-800;
 }
 
 input::-webkit-outer-spin-button,

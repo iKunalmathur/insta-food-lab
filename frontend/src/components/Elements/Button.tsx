@@ -9,7 +9,7 @@ type T_Button = {
   [key: string]: any;
 };
 
-export const Button = ({ children, type = 'button', disabled, className, ...props }: T_Button) => {
+const Button = ({ children, type = 'button', disabled, className, ...props }: T_Button) => {
   return (
     <button
       type={type}
@@ -21,3 +21,5 @@ export const Button = ({ children, type = 'button', disabled, className, ...prop
     </button>
   );
 };
+
+export default Button;

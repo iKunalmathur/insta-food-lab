@@ -1,7 +1,5 @@
-export type T_Post<T_Image = FileList> = {
-  uuid?: string;
+export type T_PostCreate<GT_Image = FileList> = {
   title: string;
-  images: T_Image;
   description: string;
   price_and_quantity: string;
   location: string;
@@ -9,7 +7,12 @@ export type T_Post<T_Image = FileList> = {
   rating: number;
   created_at: string;
   is_comment_disabled: boolean;
-  user?: T_User;
+  images: GT_Image;
+};
+
+export type T_Post = T_PostCreate<T_Image[]> & {
+  uuid: string;
+  user: T_User;
 };
 
 export type T_Image = {
@@ -29,9 +32,12 @@ export type T_User = {
 };
 
 export type T_LoginUser = {
-  name?: string;
   email: string;
   password: string;
+};
+
+export type T_RegUser = T_LoginUser & {
+  name: string;
 };
 
 export type T_REQ_METHOD = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { PostCreate } from '@/components/PostCreate';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { selectAuthUser, selectToken, setAuthUser } from '@/redux/features/auth/authSlice';
-import AuthController from '@/controllers/AuthController';
+import authService from '@/services/authService';
 
 export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       }
 
       if (!authUser) {
-        const res = await AuthController.me(accessToken);
+        const res = await authService.me();
         if (res.data) {
           dispatch(setAuthUser(res.data));
         }
@@ -60,21 +60,21 @@ export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         >
-          <PostCreate />
+          <PostCreate setIsOpen={setIsOpen} />
         </BottomDrawer>
         <div className="flex items-center justify-center">
           {location.pathname !== '/' ? (
             <Link to={'/'}>
               <FaHouse
                 className="mt-[-2.2rem] cursor-pointer rounded-full border-2 border-rose-600 bg-zinc-50 p-1 text-rose-600"
-                size={42}
+                size={38}
               />
             </Link>
           ) : (
             <button onClick={() => setIsOpen(true)}>
               <FaPlus
                 className="mt-[-2.2rem] cursor-pointer rounded-full border-2 border-rose-600 bg-zinc-50 p-1 text-rose-600"
-                size={42}
+                size={38}
               />
             </button>
           )}

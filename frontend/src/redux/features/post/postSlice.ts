@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { T_Image, T_Post } from '@/types';
+import { T_PostDB } from '@/types';
 
 type T_InitialState = {
-  posts: T_Post<T_Image[]>[];
-  activePost: T_Post | null;
+  posts: T_PostDB[];
+  activePost: T_PostDB | null;
   loading: boolean;
   error: string | null;
 };
@@ -19,13 +19,13 @@ export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    setPosts: (state, action) => {
+    setPosts: (state, action: { payload: T_PostDB[] }) => {
       state.posts = action.payload;
     },
     setActivePost: (state, action) => {
       state.activePost = action.payload;
     },
-    addPost: (state, action: { payload: T_Post<T_Image[]> }) => {
+    addPost: (state, action: { payload: T_PostDB }) => {
       state.posts.unshift(action.payload);
     },
     removePost: (state, action: { payload: { uuid: string } }) => {

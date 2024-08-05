@@ -18,11 +18,11 @@ const BottomDrawer = ({
           <button onClick={() => setIsOpen(false)}>
             <FaPlus
               className="mt-[-1.5rem] rotate-45 cursor-pointer rounded-full border-2 border-rose-600 bg-zinc-50 p-1 text-rose-600"
-              size={42}
+              size={38}
             />
           </button>
         </div>
-        <div className="mt-4 min-h-[80vh] overflow-scroll pb-4">{children}</div>
+        <div className="mt-4 max-h-[80vh] overflow-scroll pb-4">{children}</div>
       </div>
     </div>
   );

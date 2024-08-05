@@ -1,13 +1,8 @@
-import { useState } from 'react';
-import { FaBell, FaPlus, FaUserCircle } from 'react-icons/fa';
+import { FaBell, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Dialog from '@/components/Elements/Dialog';
-import { PostCreate } from '@/components/PostCreate';
 import { Logo } from '../Logo';
 
 export const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-
   return (
     <div className="relative mx-auto flex h-screen flex-col justify-between border bg-gray-100">
       <header className="flex h-[6vh] items-center justify-between bg-zinc-950 p-4 text-white">

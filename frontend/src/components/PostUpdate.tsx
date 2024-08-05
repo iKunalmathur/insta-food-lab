@@ -1,29 +1,32 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { T_PostCreate } from '@/types';
+import { T_PostCreate, T_Post } from '@/types';
 import postService from '@/services/postService';
 import formData from '@/utils/formData';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { addPost } from '@/redux/features/post/postSlice';
-import { debugLog } from '@/utils/debug';
+import { useAppSelector } from '@/redux/hooks';
 import Input from '@/components/Elements/Input';
 import Button from '@/components/Elements/Button';
 import { selectToken } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import sampleImage from '@/assets/images/sample-300.png';
+import { useEffect, useMemo, useState } from 'react';
 
-type T_PostCreateProp = {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+export const PostUpdate = ({ post }: { post: T_Post }) => {
+  const [isLoading, setIsLoading] = useState(false);
 
-export const PostCreate = ({ setIsOpen }: T_PostCreateProp) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<T_PostCreate>();
+  } = useForm<T_PostCreate>({
+    defaultValues: useMemo(() => {
+      return {
+        title: post.title,
+      };
+    }, [post]),
+  });
 
   const accessToken = useAppSelector(selectToken);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<T_PostCreate> = async data => {
@@ -32,16 +35,25 @@ export const PostCreate = ({ setIsOpen }: T_PostCreateProp) => {
       return;
     }
 
+    setIsLoading(true);
     data = formData(data);
-    const res = await postService.createPost(data);
-    if (res.status === 'success') {
-      debugLog('components/PostCreate.tsx', res.data);
-      dispatch(addPost(res.data));
-    }
 
-    reset();
-    setIsOpen(false);
+    const res = await postService.updatePost(post.uuid, data);
+    if (res.status === 'success') {
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    reset({
+      title: post.title,
+      description: post.description,
+      price_and_quantity: post.price_and_quantity,
+      location: post.location,
+      tags: post.tags,
+      rating: post.rating,
+    });
+  }, [post, reset]);
 
   return (
     <section id="post-create">
@@ -50,21 +62,13 @@ export const PostCreate = ({ setIsOpen }: T_PostCreateProp) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* images */}
-        <Input
-          label="Select Images"
-          type="file"
-          placeholder="Select Images"
-          note="Max 5 images allowed"
-          multiple
-          accept="image/png, image/jpeg"
-          {...register('images', {
-            required: {
-              value: true,
-              message: 'This field is required',
-            },
-          })}
-          error={errors.images?.message}
-        />
+        <div className="rounded-md border-2 border-dashed border-zinc-300 p-1">
+          <img
+            src={post.images.length ? post.images[0].original_url : sampleImage}
+            alt={post.title}
+            className="h-[300px] w-full rounded-md object-cover"
+          />
+        </div>
         {/* title */}
         <Input
           label="Title"
@@ -138,11 +142,11 @@ export const PostCreate = ({ setIsOpen }: T_PostCreateProp) => {
               message: 'This field is required',
             },
             min: {
-              value: 1,
+              value: 1.0,
               message: 'Rating must be between 1 and 5',
             },
             max: {
-              value: 5,
+              value: 5.0,
               message: 'Rating must be between 1 and 5',
             },
           })}
@@ -152,7 +156,7 @@ export const PostCreate = ({ setIsOpen }: T_PostCreateProp) => {
           type="submit"
           className="w-full"
         >
-          Submit
+          {isLoading ? 'Updating...' : 'Update'}
         </Button>
       </form>
     </section>

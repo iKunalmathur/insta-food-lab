@@ -1,8 +1,8 @@
-import { Button } from '@/components/Elements/Button';
+import Button from '@/components/Elements/Button';
 import Input from '@/components/Elements/Input';
 import { GuestLayout } from '@/components/Layouts/GuestLayout';
 import { Logo } from '@/components/Logo';
-import AuthController from '@/controllers/AuthController';
+import authService from '@/services/authService';
 import { setToken } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { T_LoginUser } from '@/types';
@@ -26,14 +26,14 @@ export const LoginPage = () => {
     if (error) {
       setError('');
     }
-    const res = await AuthController.login(formData(data));
+
+    const res = await authService.login(formData(data));
+
     if (res.access_token) {
       dispatch(setToken(res.access_token));
       navigate('/');
     } else {
-      if (res.message) {
-        setError(res.message);
-      }
+      setError(res.message);
     }
   };
 

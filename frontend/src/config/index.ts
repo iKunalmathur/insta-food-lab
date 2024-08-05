@@ -8,7 +8,7 @@ export const config = {
     },
   },
   api: {
-    baseUrl: 'http://localhost:8000',
+    baseUrl: 'http://localhost:8000/api',
   },
   auth: {
     accessToken:

@@ -1,11 +1,11 @@
-import { Button } from '@/components/Elements/Button';
+import Button from '@/components/Elements/Button';
 import Input from '@/components/Elements/Input';
 import { GuestLayout } from '@/components/Layouts/GuestLayout';
 import { Logo } from '@/components/Logo';
-import AuthController from '@/controllers/AuthController';
+import authService from '@/services/authService';
 import { setToken } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
-import { T_LoginUser } from '@/types';
+import { T_RegUser } from '@/types';
 import formData from '@/utils/formData';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,13 +20,13 @@ export const RegPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<T_LoginUser>();
+  } = useForm<T_RegUser>();
 
-  const onSubmit = async (data: T_LoginUser) => {
+  const onSubmit = async (data: T_RegUser) => {
     if (error) {
       setError('');
     }
-    const res = await AuthController.register(formData(data));
+    const res = await authService.register(formData(data));
     if (res.access_token) {
       dispatch(setToken(res.access_token));
       navigate('/');

@@ -4,13 +4,13 @@ import { createSlice } from '@reduxjs/toolkit';
 type T_InitialState = {
   authUser: null | T_User;
   isLogin: boolean;
-  token: string | null;
+  accessToken: string | null;
 };
 
 const initialState: T_InitialState = {
   authUser: null,
   isLogin: false,
-  token: null,
+  accessToken: null,
 };
 
 export const authSlice = createSlice({
@@ -24,7 +24,11 @@ export const authSlice = createSlice({
       state.isLogin = action.payload;
     },
     setToken: (state, action) => {
-      state.token = action.payload;
+      state.accessToken = action.payload;
+
+      if (action.payload) {
+        localStorage.setItem('accessToken', action.payload);
+      }
     },
   },
 });
@@ -34,4 +38,4 @@ export default authSlice.reducer;
 
 export const selectAuthUser = (state: { auth: T_InitialState }) => state.auth.authUser;
 export const selectIsLogin = (state: { auth: T_InitialState }) => state.auth.isLogin;
-export const selectToken = (state: { auth: T_InitialState }) => state.auth.token;
+export const selectToken = (state: { auth: T_InitialState }) => state.auth.accessToken;

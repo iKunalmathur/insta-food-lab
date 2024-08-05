@@ -1,9 +1,9 @@
-import { T_Image, T_Post } from '@/types';
+import { T_Post } from '@/types';
 import { FaHeart, FaUserCircle } from 'react-icons/fa';
-import defaultImage from '../assets/images/sample-300.png';
 import StarRating from './StarRating';
+import sampleImage from '@/assets/images/sample-300.png';
 
-export const Posts = ({ posts }: { posts: T_Post<T_Image[]>[] }) => {
+const HomeFeed = ({ posts }: { posts: T_Post[] }) => {
   return (
     <div className="h-full overflow-y-scroll">
       {posts.map(post => (
@@ -11,21 +11,19 @@ export const Posts = ({ posts }: { posts: T_Post<T_Image[]>[] }) => {
           key={post.uuid}
           className="flex flex-col border-b bg-zinc-50"
         >
-          <div className="min-h-[20px] p-4">
+          <div className="min-h-[20px] p-2">
             <div className="flex items-center gap-2">
               <FaUserCircle />
               <p className="text-sm">{post.user?.name}</p>
             </div>
+            <p className="mt-2 text-xs">{post.title}</p>
           </div>
-          {post.images.map(image => (
-            <img
-              key={image.uuid}
-              src={image.original_url || defaultImage}
-              className="aspect-square w-[full] object-cover"
-              alt="image"
-            />
-          ))}
-          <div className="min-h-[20px] p-4">
+          <img
+            src={post.images.length ? post.images[0].original_url : sampleImage}
+            className="aspect-square w-[full] object-cover"
+            alt="image"
+          />
+          <div className="min-h-[20px] p-2">
             <div className="flex justify-between">
               <div>
                 <FaHeart
@@ -48,3 +46,5 @@ export const Posts = ({ posts }: { posts: T_Post<T_Image[]>[] }) => {
     </div>
   );
 };
+
+export default HomeFeed;
