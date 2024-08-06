@@ -2,9 +2,11 @@
 
 namespace App\Trait;
 
+use Illuminate\Http\JsonResponse;
+
 trait TRequestResponse
 {
-    protected function respondWithToken($token)
+    protected function respondWithToken($token):JsonResponse
     {
         return response()->json([
             'access_token' => $token,
@@ -13,7 +15,7 @@ trait TRequestResponse
         ]);
     }
 
-    protected function sendResponse($data = null, string $message, int $status = 200)
+    protected function sendResponse(string $message, int $status = 200,  $data = NULL):JsonResponse
     {
         $response = [
             'status' => 'success',
@@ -30,7 +32,7 @@ trait TRequestResponse
         return response()->json($response, $status);
     }
 
-    protected function sendError($error, $code = 404)
+    protected function sendError(string $error, int $code = 404):JsonResponse
     {
         $response = [
             'status' => 'error',

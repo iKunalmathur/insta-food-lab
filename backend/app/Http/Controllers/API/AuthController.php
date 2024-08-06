@@ -43,13 +43,13 @@ class AuthController extends BaseController
 
     public function me(): JsonResponse
     {
-        return $this->sendResponse(UserResource::make(auth()->user()), 'Successfully logged in');
+        return $this->sendResponse('Successfully logged in',200 , UserResource::make(auth()->user()));
     }
 
     public function logout(): JsonResponse
     {
         auth()->logout(TRUE);
-        return $this->sendResponse(null, 'Successfully logged out');
+        return $this->sendResponse('Successfully logged out');
     }
 
     public function refresh(): JsonResponse

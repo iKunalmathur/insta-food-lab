@@ -25,7 +25,7 @@ class LikeStoreRequest extends FormRequest
 
         return [
             'model' => ['required', 'string', 'in:App\Models\Post,App\Models\Comment'],
-            'is_liked' => ['required', 'boolean', 'min:0', 'max:1'],
+            //            'is_liked' => ['required', 'boolean', 'min:0', 'max:1'],
         ];
     }
 }

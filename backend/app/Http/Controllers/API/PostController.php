@@ -88,7 +88,6 @@ class PostController extends BaseController
         parent::baseDelete($post);
 
         return  $this->sendResponse(
-            NULL,
             "Post deleted successfully",
             '204'
         );

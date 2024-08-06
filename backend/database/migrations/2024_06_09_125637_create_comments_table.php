@@ -17,6 +17,7 @@ return new class extends Migration
             $table->morphs('model');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
             $table->uuid()->nullable()->unique();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('is_liked')->default(0);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
             $table->uuid()->nullable()->unique();
         });
     }

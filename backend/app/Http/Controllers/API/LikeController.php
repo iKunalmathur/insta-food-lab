@@ -7,8 +7,8 @@ use App\Http\Requests\API\LikeIndexRequest;
 use App\Http\Requests\API\LikeStoreRequest;
 use App\Http\Resources\API\LikeResource;
 use App\Models\Like;
-use App\Models\Post;
 use App\Trait\TRequestResponse;
+use Illuminate\Http\JsonResponse;
 
 class LikeController extends BaseController
 {
@@ -16,7 +16,7 @@ class LikeController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index(LikeIndexRequest $request, $uuid)
+    public function index(LikeIndexRequest $request, $uuid):JsonResponse
     {
         $model = $request->model::where('uuid', $uuid)
             ->firstOrFail();
@@ -31,7 +31,7 @@ class LikeController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(LikeStoreRequest $request, $uuid)
+    public function store(LikeStoreRequest $request, $uuid):JsonResponse
     {
         $model = $request->model::where('uuid', $uuid)
             ->firstOrFail();
@@ -53,12 +53,13 @@ class LikeController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(Like $like)
+    public function delete(Like $like):JsonResponse
     {
         if (auth()->user()->id !== $like->user_id) {
             return $this->sendError('You are not allowed to delete this like', 401);
         }
+        parent::baseDelete($like);
 
-        return parent::baseDelete($like);
+        return $this->sendResponse('Like deleted successfully');
     }
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('is_comment_disabled')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
             $table->uuid()->nullable()->unique();
         });
     }
