@@ -5,7 +5,7 @@ import formData from '@/utils/formData';
 import { useAppSelector } from '@/redux/hooks';
 import Input from '@/components/Elements/Input';
 import Button from '@/components/Elements/Button';
-import { selectToken } from '@/redux/features/auth/authSlice';
+import { getStoreToken } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import sampleImage from '@/assets/images/sample-300.png';
 import { useEffect, useMemo, useState } from 'react';
@@ -26,7 +26,7 @@ export const PostUpdate = ({ post }: { post: T_Post }) => {
     }, [post]),
   });
 
-  const accessToken = useAppSelector(selectToken);
+  const accessToken = useAppSelector(getStoreToken);
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<T_PostCreate> = async data => {

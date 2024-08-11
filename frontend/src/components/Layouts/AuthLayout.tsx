@@ -6,12 +6,12 @@ import BottomDrawer from '../BottomDrawer';
 import { useEffect, useState } from 'react';
 import { PostCreate } from '@/components/PostCreate';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { selectAuthUser, selectToken, setAuthUser } from '@/redux/features/auth/authSlice';
+import { selectAuthUser, getStoreToken, setAuthUser } from '@/redux/features/auth/authSlice';
 import authService from '@/services/authService';
 
 export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const accessToken = useAppSelector(selectToken);
+  const accessToken = useAppSelector(getStoreToken);
   const authUser = useAppSelector(selectAuthUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

@@ -30,12 +30,26 @@ export const authSlice = createSlice({
         localStorage.setItem('accessToken', action.payload);
       }
     },
+    setTokenWithExpiry: (state, action) => {
+      const { access_token, expires_in } = action.payload;
+      state.accessToken = access_token;
+      localStorage.setItem('accessToken', access_token);
+      const accessTokenExpiry = new Date().getTime() + expires_in * 1000;
+      localStorage.setItem('accessTokenExpiry', accessTokenExpiry.toString());
+    },
   },
 });
 
-export const { setAuthUser, setIsLogin, setToken } = authSlice.actions;
+export const { setAuthUser, setIsLogin, setToken ,setTokenWithExpiry} = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectAuthUser = (state: { auth: T_InitialState }) => state.auth.authUser;
 export const selectIsLogin = (state: { auth: T_InitialState }) => state.auth.isLogin;
-export const selectToken = (state: { auth: T_InitialState }) => state.auth.accessToken;
+export const getStoreToken = (state: { auth: T_InitialState }) => {
+  const token = localStorage.getItem('accessToken');
+  const tokenExpiry = localStorage.getItem('accessTokenExpiry');
+  if (token && tokenExpiry && Number(tokenExpiry) > new Date().getTime()) {
+    return state.auth.accessToken || token;
+  }
+  return null;
+}

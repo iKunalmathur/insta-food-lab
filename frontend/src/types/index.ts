@@ -5,7 +5,6 @@ export type T_PostCreate<GT_Image = FileList> = {
   location: string;
   tags: string;
   rating: number;
-  created_at: string;
   is_comment_disabled: boolean;
   images: GT_Image;
 };
@@ -13,6 +12,9 @@ export type T_PostCreate<GT_Image = FileList> = {
 export type T_Post = T_PostCreate<T_Image[]> & {
   uuid: string;
   user: T_User;
+  is_already_liked: boolean;
+  likes: number;
+  created_at: string;
 };
 
 export type T_Image = {

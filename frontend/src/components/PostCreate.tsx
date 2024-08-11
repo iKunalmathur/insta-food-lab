@@ -7,7 +7,7 @@ import { addPost } from '@/redux/features/post/postSlice';
 import { debugLog } from '@/utils/debug';
 import Input from '@/components/Elements/Input';
 import Button from '@/components/Elements/Button';
-import { selectToken } from '@/redux/features/auth/authSlice';
+import { getStoreToken } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 type T_PostCreateProp = {
@@ -22,7 +22,7 @@ export const PostCreate = ({ setIsOpen }: T_PostCreateProp) => {
     formState: { errors },
   } = useForm<T_PostCreate>();
 
-  const accessToken = useAppSelector(selectToken);
+  const accessToken = useAppSelector(getStoreToken);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

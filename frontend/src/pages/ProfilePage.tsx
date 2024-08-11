@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/redux/hooks';
-import { selectAuthUser, selectToken } from '@/redux/features/auth/authSlice';
+import { selectAuthUser, getStoreToken } from '@/redux/features/auth/authSlice';
 import { AuthLayout } from '@/components/Layouts/AuthLayout';
 import { ButtonLink } from '@/components/Elements/ButtonLink';
 import BottomDrawer from '@/components/BottomDrawer';
@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const [selectedPost, setSelectedPost] = useState<T_Post>();
 
   const authUser = useAppSelector(selectAuthUser);
-  const accessToken = useAppSelector(selectToken);
+  const accessToken = useAppSelector(getStoreToken);
 
   async function handlePost(post: T_Post) {
     setSelectedPost(post);

@@ -2,8 +2,18 @@ import { T_Post } from '@/types';
 import { FaHeart, FaUserCircle } from 'react-icons/fa';
 import StarRating from './StarRating';
 import sampleImage from '@/assets/images/sample-300.png';
+import postService from '@/services/postService';
+import {useAppDispatch, useAppSelector} from "@/redux/hooks.ts";
+import {getStorePosts, updatePost} from "@/redux/features/post/postSlice.ts";
 
-const HomeFeed = ({ posts }: { posts: T_Post[] }) => {
+const HomeFeed = () => {
+    const posts = useAppSelector(getStorePosts);
+    const dispatch = useAppDispatch();
+  async function handleLike(post: T_Post) {
+      const res = await postService.likePost(post.uuid);
+      dispatch(updatePost(res.data));
+  }
+
   return (
     <div className="h-full overflow-y-scroll">
       {posts.map(post => (
@@ -26,11 +36,18 @@ const HomeFeed = ({ posts }: { posts: T_Post[] }) => {
           <div className="min-h-[20px] p-2">
             <div className="flex justify-between">
               <div>
-                <FaHeart
-                  size={22}
-                  className="text-zinc-300"
-                />
-                <span className="text-xs">100 likes</span>
+                {post.is_already_liked ? (
+                  <FaHeart
+                    className="cursor-pointer text-red-500"
+                    onClick={() => handleLike(post)}
+                  />
+                ) : (
+                  <FaHeart
+                    className="cursor-pointer"
+                    onClick={() => handleLike(post)}
+                  />
+                )}
+                <span className="text-xs">{post.likes} likes</span>
               </div>
               <div className="text-sm">
                 <StarRating rating={post.rating} />

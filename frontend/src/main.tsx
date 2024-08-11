@@ -7,12 +7,12 @@ import { Provider as ReduxProvider } from 'react-redux';
 import store from '@/redux/store.ts';
 
 import App from '@/App.tsx';
-import { Notifications } from '@/components/Notifications.tsx';
-import { LoginPage } from './pages/LoginPage';
-import { RegPage } from './pages/RegPage';
-import { HomePage } from './pages/HomePage';
-import ProfilePage from './pages/ProfilePage';
-import SettingsPage from './pages/SettingsPage';
+import { LoginPage } from '@/pages/LoginPage';
+import { RegPage } from '@/pages/RegPage';
+import { HomePage } from '@/pages/HomePage';
+import ProfilePage from '@/pages/ProfilePage';
+import SettingsPage from '@/pages/SettingsPage';
+import NotificationsPage from "@/pages/NotificationsPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/notifications',
-        element: <Notifications />,
+        element: <NotificationsPage />,
       },
       {
         path: '/profile',

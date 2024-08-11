@@ -3,7 +3,7 @@ import Input from '@/components/Elements/Input';
 import { GuestLayout } from '@/components/Layouts/GuestLayout';
 import { Logo } from '@/components/Logo';
 import authService from '@/services/authService';
-import { setToken } from '@/redux/features/auth/authSlice';
+import { setTokenWithExpiry} from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { T_LoginUser } from '@/types';
 import formData from '@/utils/formData';
@@ -29,8 +29,10 @@ export const LoginPage = () => {
 
     const res = await authService.login(formData(data));
 
+    console.log(res);
+
     if (res.access_token) {
-      dispatch(setToken(res.access_token));
+      dispatch(setTokenWithExpiry(res));
       navigate('/');
     } else {
       setError(res.message);

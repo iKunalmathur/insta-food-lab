@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-useless-catch */
 import { T_PostCreate } from '@/types';
 import api from '@/utils/api';
@@ -7,8 +8,9 @@ class PostService {
     try {
       const response = await api.get('/feed');
       return response.data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
@@ -16,8 +18,9 @@ class PostService {
     try {
       const response = await api.get('/posts');
       return response.data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
@@ -29,8 +32,9 @@ class PostService {
         },
       });
       return response.data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
@@ -42,8 +46,9 @@ class PostService {
         },
       });
       return response.data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
@@ -51,8 +56,21 @@ class PostService {
     try {
       const response = await api.delete(`/posts/${postId}`);
       return response.data;
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+
+  async likePost(postId: string) {
+    try {
+      const response = await api.post(`/likes/${postId}/save`, {
+        model: 'App\\Models\\Post',
+      });
+      return response.data;
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 }

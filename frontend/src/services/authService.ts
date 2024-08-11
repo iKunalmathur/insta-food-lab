@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { T_LoginUser, T_RegUser } from '@/types';
 import api from '@/utils/api';
 
@@ -11,8 +12,9 @@ class authService {
         },
       });
       return response.data;
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
@@ -25,8 +27,9 @@ class authService {
         },
       });
       return response.data;
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
@@ -35,8 +38,9 @@ class authService {
     try {
       const response = await api.get('/auth/me');
       return response.data;
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
