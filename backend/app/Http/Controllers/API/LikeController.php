@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\API\LikeIndexRequest;
 use App\Http\Requests\API\LikeStoreRequest;
 use App\Http\Resources\API\LikeResource;
+use App\Http\Resources\API\PostResource;
 use App\Models\Like;
 use App\Trait\TRequestResponse;
 use Illuminate\Http\JsonResponse;
@@ -48,6 +49,31 @@ class LikeController extends BaseController
             $model->likes(),
             LikeResource::class
         );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function save(LikeStoreRequest $request, $uuid):JsonResponse
+    {
+        $model = $request->model::where('uuid', $uuid)
+            ->firstOrFail();
+
+        if ($model->isAlreadyLiked(auth()->user()->id)) {
+            $like = $model->likes()->where('user_id', auth()->user()->id)->first();
+            parent::baseDelete($like);
+        }else {
+            parent::baseStore(
+                $request,
+                $model->likes(),
+                LikeResource::class
+            );
+        }
+
+        return $this->sendResponse(
+            'Like saved successfully',
+            200,
+            PostResource::make($model));
     }
 
     /**

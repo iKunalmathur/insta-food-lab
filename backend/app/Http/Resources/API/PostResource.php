@@ -23,10 +23,11 @@ class PostResource extends JsonResource
             'location' => $this->location,
             'tags' => $this->tags,
             'rating' => $this->rating,
-            'likes' => $this->likes,
+            'likes' => $this->likes->count(),
             'comments' => $this->comments,
             'is_archived' => $this->is_archived,
             'is_comment_disabled' => $this->is_comment_disabled,
+            'is_already_liked' => $this->isAlreadyLiked(auth()->id()),
             'user' => UserResource::make($this->user),
             'images' => MediaResource::collection($this->getMedia('post_images')),
         ];

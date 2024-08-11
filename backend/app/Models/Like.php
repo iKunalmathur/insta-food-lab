@@ -6,10 +6,11 @@ use App\Trait\HasUser;
 use App\Trait\HasUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Like extends Model
 {
-    use HasFactory, HasUser, HasUUID;
+    use HasFactory, HasUser, HasUUID, SoftDeletes;
 
     protected $fillable = [
         'user_id',

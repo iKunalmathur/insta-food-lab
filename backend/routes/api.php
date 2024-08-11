@@ -99,6 +99,8 @@ Route::middleware('auth:api')
                         ->name('index');
                     Route::post('/{uuid}', [LikeController::class, 'store'])
                         ->name('store');
+                    Route::post('/{uuid}/save', [LikeController::class, 'save'])
+                        ->name('save');
                     Route::delete('/{like}/delete', [LikeController::class, 'delete'])
                         ->name('delete');
                 });
